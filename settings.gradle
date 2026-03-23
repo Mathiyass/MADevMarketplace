@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolution {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://payhere.github.io/payhere-mobilesdk-android/maven' }
+    }
+}
+
+rootProject.name = "MADevMarketplace"
+include ':app'

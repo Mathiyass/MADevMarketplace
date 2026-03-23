@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA_Dev Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login View -->
+    <div id="login-view" class="view active">
+        <div class="login-box">
+            <h2>MA_Dev Admin</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="admin@madev.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+            <p id="auth-error" style="color: var(--error-red); margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard View -->
+    <div id="main-view" class="view" style="display: none; width: 100%; height: 100%;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2 class="sidebar-brand">MA_Dev</h2>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-target="dashboard">Dashboard</a>
+                <a href="#users" class="nav-item" data-target="users">Users</a>
+                <a href="#orders" class="nav-item" data-target="orders">Orders</a>
+                <a href="#products" class="nav-item" data-target="products">Products</a>
+            </nav>
+            <div class="sidebar-bottom">
+                <button id="logout-btn" class="nav-item" style="border:none;background:transparent;width:100%;text-align:left;cursor:pointer;">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard</h1>
+            </header>
+            <div class="content-body" id="content-body">
+                <!-- Dashboard Section -->
+                <div id="section-dashboard" class="page-section">
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <h3>Total Revenue</h3>
+                            <div class="value" id="metric-revenue">$0.00</div>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Total Orders</h3>
+                            <div class="value" id="metric-orders">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Total Users</h3>
+                            <div class="value" id="metric-users">0</div>
+                        </div>
+                    </div>
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Recent Orders</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Status</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-recent-orders"></tbody>
+                    </table>
+                </div>
+
+                <!-- Users Section -->
+                <div id="section-users" class="page-section" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Users Directory</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+
+                <!-- Orders Section -->
+                <div id="section-orders" class="page-section" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">All Orders</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>User</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body"></tbody>
+                    </table>
+                </div>
+
+                <!-- Products Section -->
+                <div id="section-products" class="page-section" style="display: none;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 1rem;">
+                        <h3>Product Catalog</h3>
+                        <button class="btn-primary" style="width:auto; margin-top:0;">Add Product</button>
+                    </div>
+                    <div class="products-grid" id="products-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
