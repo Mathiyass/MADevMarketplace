@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA_Dev Dashboard | Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-overlay" class="overlay active">
+        <div class="login-card">
+            <h1>>_ MA_Dev Admin</h1>
+            <p>Enter Master Password</p>
+            <input type="password" id="master-pwd" placeholder="Password...">
+            <button onclick="login()">Authenticate</button>
+            <p id="login-err" class="danger hidden">Hash mismatch.</p>
+        </div>
+    </div>
+    
+    <div id="app" class="hidden">
+        <aside class="sidebar">
+            <h2 class="brand">>_ MA_Dev</h2>
+            <nav>
+                <a href="#" onclick="showTab('dashboard')" class="active" id="nav-dashboard">Dashboard</a>
+                <a href="#" onclick="showTab('products')" id="nav-products">Products</a>
+                <a href="#" onclick="showTab('users')" id="nav-users">Users</a>
+                <a href="#" onclick="showTab('orders')" id="nav-orders">Orders</a>
+            </nav>
+        </aside>
+        <main class="content">
+            <div id="tab-dashboard" class="tab active">
+                <header>
+                    <h2>System Overview</h2>
+                </header>
+                <div class="metrics">
+                    <div class="card"><h3>Total Revenue</h3><p class="data">LKR 0</p></div>
+                    <div class="card"><h3>Active Products</h3><p class="data">5</p></div>
+                    <div class="card"><h3>Orders Today</h3><p class="data">0</p></div>
+                </div>
+            </div>
+            
+            <div id="tab-products" class="tab hidden">
+                <header>
+                    <h2>Manage Products</h2>
+                    <button class="btn-primary">Add Product</button>
+                </header>
+                <div class="card table-wrapper">
+                    <table id="products-table">
+                        <thead><tr><th>ID</th><th>Title</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users Tab and Orders Tab omitted for brevity in demo -->
+        </main>
+    </div>
+
+    <!-- CDN scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
