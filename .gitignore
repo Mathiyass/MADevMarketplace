@@ -1,0 +1,9 @@
+/app/google-services.json
+/app/src/main/res/values/secrets.xml
+node_modules/
+.gradle/
+build/
+local.properties
+.DS_Store
+*.iml
+.idea/
