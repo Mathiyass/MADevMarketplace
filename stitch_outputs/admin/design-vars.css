@@ -1,0 +1,24 @@
+:root {
+  --bg: #0D1117;
+  --surface: #161B22;
+  --surface-2: #21262D;
+  --border: #30363D;
+  --text-primary: #E6EDF3;
+  --text-muted: #8B949E;
+  --teal-accent: #00E5CC;
+  
+  /* Status Colors */
+  --success: #3FB950;
+  --danger: #F85149;
+  --warning: #D29922;
+
+  /* Category colors */
+  --cat-local-ai: #FF6B6B;
+  --cat-scripts: #4ECDC4;
+  --cat-linux-iso: #45B7D1;
+  --cat-tools: #FFA07A;
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+}

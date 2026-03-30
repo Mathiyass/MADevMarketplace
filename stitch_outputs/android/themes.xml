@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MADevMarketplace" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/teal_accent</item>
+        <item name="colorPrimaryVariant">@color/bg</item>
+        <item name="colorOnPrimary">@color/bg</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/surface</item>
+        <item name="colorSecondaryVariant">@color/surface_2</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        
+        <!-- Typography -->
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#0D1117</color>
+    <color name="surface">#161B22</color>
+    <color name="surface_2">#21262D</color>
+    <color name="border">#30363D</color>
+    <color name="text_primary">#E6EDF3</color>
+    <color name="text_muted">#8B949E</color>
+    <color name="teal_accent">#00E5CC</color>
+    <color name="success">#3FB950</color>
+    <color name="danger">#F85149</color>
+    <color name="warning">#D29922</color>
+    <color name="cat_local_ai">#FF6B6B</color>
+    <color name="cat_scripts">#4ECDC4</color>
+    <color name="cat_linux_iso">#45B7D1</color>
+    <color name="cat_tools">#FFA07A</color>
+</resources>
