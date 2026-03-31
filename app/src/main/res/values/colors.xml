@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds (Protocol Carbon) -->
+    <color name="bg_dark">#0D1117</color>
+    <color name="surface">#161B22</color>
+    <color name="surface_high">#21262D</color>
+    <color name="surface_low">#010409</color>
+    <color name="surface_lowest">#000000</color>
+    <color name="border_ghost">#30363D</color>
+
+    <!-- Text -->
+    <color name="text_primary">#C9D1D9</color>
+    <color name="text_muted">#8B949E</color>
+    <color name="text_on_primary">#0D1117</color>
+
+    <!-- Accents -->
+    <color name="teal_primary">#00E5CC</color>
+    <color name="teal_glow">#58A6FF</color>
+    <color name="accent_vibrant">#00E5CC</color>
+
+    <!-- Status -->
+    <color name="success">#238636</color>
+    <color name="danger">#DA3633</color>
+    <color name="warning">#D29922</color>
+    <color name="info">#58A6FF</color>
+
+    <!-- Categories (Tonal Terminal) -->
+    <color name="cat_local_ai">#00E5CC</color>
+    <color name="cat_scripts">#58A6FF</color>
+    <color name="cat_linux_iso">#C9D1D9</color>
+    <color name="cat_tools">#D29922</color>
+    <color name="cat_default">#8B949E</color>
+
+    <!-- Navigation Bar -->
+    <color name="nav_bg">#161B22</color>
+    <color name="nav_selected">#00E5CC</color>
+    <color name="nav_unselected">#8B949E</color>
+
+    <!-- Status bar -->
+    <color name="status_bar">#0D1117</color>
+</resources>

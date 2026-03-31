@@ -1,9 +1,43 @@
-/app/google-services.json
-/app/src/main/res/values/secrets.xml
-node_modules/
-.gradle/
-build/
-local.properties
-.DS_Store
+# ─── Android ──────────────────────────────────────────────
 *.iml
+.gradle/
+local.properties
 .idea/
+.DS_Store
+build/
+captures/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Generated
+app/build/
+app/release/
+
+# ─── Secrets — NEVER COMMIT THESE ────────────────────────
+app/google-services.json
+app/src/main/res/values/secrets.xml
+google-services.json
+*.keystore
+*.jks
+keystore.properties
+
+# ─── Admin Panel ──────────────────────────────────────────
+MADevAdmin/node_modules/
+MADevAdmin/.env
+
+# ─── Firebase / Supabase env ─────────────────────────────
+.env
+.env.local
+.env.production
+firebase-debug.log
+.firebaserc
+
+# ─── OS / Editor ─────────────────────────────────────────
+Thumbs.db
+*.log
+*.tmp
+.vscode/
+.gemini/

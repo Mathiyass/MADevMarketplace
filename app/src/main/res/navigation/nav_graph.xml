@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- HOME -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.madev.marketplace.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+
+    <!-- SEARCH -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.madev.marketplace.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_detail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <!-- DOWNLOADS -->
+    <fragment
+        android:id="@+id/downloadsFragment"
+        android:name="com.madev.marketplace.ui.downloads.DownloadsFragment"
+        android:label="Downloads"
+        tools:layout="@layout/fragment_downloads" />
+
+    <!-- MEETUPS -->
+    <fragment
+        android:id="@+id/meetupsFragment"
+        android:name="com.madev.marketplace.ui.meetups.MeetupsFragment"
+        android:label="Meetups"
+        tools:layout="@layout/fragment_meetups" />
+
+    <!-- PROFILE -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.madev.marketplace.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <!-- PRODUCT DETAIL (not a bottom nav destination) -->
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.madev.marketplace.ui.product.ProductDetailFragment"
+        android:label="Product Detail"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            app:argType="string" />
+        <argument
+            android:name="productTitle"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <!-- NOTIFICATIONS -->
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.madev.marketplace.ui.notifications.NotificationsFragment"
+        android:label="Notifications" />
+
+    <!-- CART -->
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.madev.marketplace.ui.cart.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" />
+
+</navigation>
