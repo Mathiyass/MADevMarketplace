@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme (Protocol Carbon) -->
+    <style name="Theme.MADevMarketplace" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/nav_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorPrimaryDark">@color/teal_glow</item>
+        <item name="colorAccent">@color/teal_primary</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorBackground">@color/bg_dark</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="editTextStyle">@style/Widget.MADev.TextInputEditText</item>
+        <item name="materialButtonStyle">@style/Widget.MADev.Button</item>
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.MADevMarketplace.Splash" parent="Theme.MADevMarketplace">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Text Styles (Syntax Carbon) -->
+    <style name="TextAppearance.MADev.H1" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.MADev.H2" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.MADev.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextAppearance.MADev.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.MADev.Price">
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textColor">@color/teal_glow</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.MADev.Terminal" parent="TextAppearance.MADev.Caption">
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textColor">@color/teal_primary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <!-- Widget Styles (8dp Radius Production Standard) -->
+    <style name="Widget.MADev.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="backgroundTint">@color/teal_primary</item>
+        <item name="android:textColor">@color/text_on_primary</item>
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="elevation">2dp</item>
+    </style>
+    <style name="Widget.MADev.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minHeight">56dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeColor">@color/teal_primary</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/teal_primary</item>
+        <item name="fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textSize">14sp</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.MADev.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/surface_lowest</item>
+        <item name="boxStrokeColor">@color/border_ghost</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="hintTextColor">@color/text_muted</item>
+        <item name="android:textColorHint">@color/text_muted</item>
+    </style>
+    <style name="Widget.MADev.TextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="fontFamily">@font/inter</item>
+    </style>
+    <style name="Widget.MADev.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeColor">@color/border_ghost</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    <style name="Widget.MADev.BottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/nav_bg</item>
+        <item name="itemIconTint">@color/nav_selected</item>
+        <item name="itemTextColor">@color/nav_selected</item>
+        <item name="android:elevation">8dp</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+    <style name="Widget.MADev.Chip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/surface</item>
+        <item name="chipStrokeColor">@color/border_ghost</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="chipCornerRadius">8dp</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:fontFamily">@font/jetbrains_mono</item>
+    </style>
+</resources>

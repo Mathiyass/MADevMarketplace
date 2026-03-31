@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA_Dev Admin | Control Panel</title>
+  <meta name="description" content="MA_Dev Marketplace Admin — manage products, orders, users, broadcasts" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── LOGIN OVERLAY ─────────────────────────────── -->
+  <div id="login-overlay" class="overlay">
+    <div class="login-card">
+      <div class="login-logo">&gt;_ MA_Dev</div>
+      <p class="login-sub">Admin Control Panel</p>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <label class="field-label">Master Password</label>
+        <input type="password" id="master-pwd" placeholder="Enter password…" autocomplete="current-password" required />
+        <button type="submit" id="btn-login">Authenticate →</button>
+      </form>
+      <p id="login-err" class="err-msg hidden">⚠ Access denied. Invalid credentials.</p>
+    </div>
+  </div>
+
+  <!-- ─── APP SHELL ──────────────────────────────────── -->
+  <div id="app" class="hidden layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="brand">&gt;_ MA_Dev</span>
+        <span class="brand-sub">Admin Panel</span>
+      </div>
+      <nav>
+        <a href="#" onclick="showTab('dashboard')"  id="nav-dashboard"  class="nav-link active"><span class="nav-icon">◈</span>Dashboard</a>
+        <a href="#" onclick="showTab('products')"   id="nav-products"   class="nav-link"><span class="nav-icon">◉</span>Products</a>
+        <a href="#" onclick="showTab('orders')"     id="nav-orders"     class="nav-link"><span class="nav-icon">◎</span>Orders</a>
+        <a href="#" onclick="showTab('users')"      id="nav-users"      class="nav-link"><span class="nav-icon">◍</span>Users</a>
+        <a href="#" onclick="showTab('meetups')"    id="nav-meetups"    class="nav-link"><span class="nav-icon">◐</span>Meetups</a>
+        <a href="#" onclick="showTab('broadcast')"  id="nav-broadcast"  class="nav-link"><span class="nav-icon">◑</span>Broadcast</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+        <span class="status-dot"></span><span class="status-text">Supabase Connected</span>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div id="topbar-title" class="page-title">Dashboard</div>
+        <div class="topbar-right">
+          <div class="search-wrap">
+            <input type="text" id="global-search" placeholder="Search…" onkeyup="globalSearch(this.value)" />
+          </div>
+          <div class="admin-badge">&gt;_ admin</div>
+        </div>
+      </header>
+
+      <!-- ── DASHBOARD TAB ── -->
+      <div id="tab-dashboard" class="tab">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">TOTAL REVENUE</div>
+            <div class="kpi-value" id="kpi-revenue">LKR 0</div>
+            <div class="kpi-sub" id="kpi-revenue-sub">0 paid orders</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">ACTIVE PRODUCTS</div>
+            <div class="kpi-value" id="kpi-products">0</div>
+            <div class="kpi-sub">in catalogue</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">TOTAL ORDERS</div>
+            <div class="kpi-value" id="kpi-orders">0</div>
+            <div class="kpi-sub" id="kpi-orders-sub">0 pending</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">REGISTERED USERS</div>
+            <div class="kpi-value" id="kpi-users">0</div>
+            <div class="kpi-sub">with profiles</div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="card chart-card">
+            <div class="card-heading">Revenue by Category</div>
+            <canvas id="chart-category" height="260"></canvas>
+          </div>
+          <div class="card chart-card">
+            <div class="card-heading">Orders Over Time</div>
+            <canvas id="chart-orders" height="260"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-heading">Recent Orders</div>
+          <table id="recent-orders-table" class="data-table">
+            <thead><tr><th>Order ID</th><th>User</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody><!-- filled by JS --></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PRODUCTS TAB ── -->
+      <div id="tab-products" class="tab hidden">
+        <div class="tab-toolbar">
+          <button class="btn-primary" onclick="openProductModal()">+ Add Product</button>
+          <div class="filter-row">
+            <select id="filter-category" onchange="loadProducts()">
+              <option value="">All Categories</option>
+              <option value="Local_AI">Local AI</option>
+              <option value="Scripts">Scripts</option>
+              <option value="Linux_ISO">Linux ISO</option>
+              <option value="Tools">Tools</option>
+            </select>
+            <label class="toggle-wrap">
+              <input type="checkbox" id="filter-active" checked onchange="loadProducts()" />
+              Active only
+            </label>
+          </div>
+        </div>
+        <div class="card table-wrap">
+          <table class="data-table" id="products-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Price</th><th>Size</th><th>Downloads</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+          <div id="products-loading" class="table-loading">Loading…</div>
+        </div>
+      </div>
+
+      <!-- ── ORDERS TAB ── -->
+      <div id="tab-orders" class="tab hidden">
+        <div class="tab-toolbar">
+          <select id="filter-order-status" onchange="loadOrders()">
+            <option value="">All Status</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+          <button class="btn-outline" onclick="exportOrdersToCSV()">⤓ Export CSV</button>
+        </div>
+        <div class="card table-wrap">
+          <table class="data-table" id="orders-table">
+            <thead><tr><th>Order ID</th><th>User ID</th><th>Total</th><th>Status</th><th>Ref</th><th>Date</th></tr></thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+          <div id="orders-loading" class="table-loading">Loading…</div>
+        </div>
+      </div>
+
+      <!-- ── USERS TAB ── -->
+      <div id="tab-users" class="tab hidden">
+        <div class="card table-wrap">
+          <table class="data-table" id="users-table">
+            <thead><tr><th>User ID</th><th>Full Name</th><th>FCM Token</th><th>Total Spent</th><th>Joined</th></tr></thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+          <div id="users-loading" class="table-loading">Loading…</div>
+        </div>
+      </div>
+
+      <!-- ── MEETUPS TAB ── -->
+      <div id="tab-meetups" class="tab hidden">
+        <div class="tab-toolbar">
+          <button class="btn-primary" onclick="openMeetupModal()">+ Add Meetup</button>
+        </div>
+        <div class="card table-wrap">
+          <table class="data-table" id="meetups-table">
+            <thead><tr><th>Title</th><th>Location</th><th>Starts</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="meetups-tbody"></tbody>
+          </table>
+          <div id="meetups-loading" class="table-loading">Loading…</div>
+        </div>
+      </div>
+
+      <!-- ── BROADCAST TAB ── -->
+      <div id="tab-broadcast" class="tab hidden">
+        <div class="card broadcast-card">
+          <div class="card-heading">Send Push Notification</div>
+          <p class="muted">Sends a push notification to ALL registered FCM devices.</p>
+          <label class="field-label">Notification Title</label>
+          <input type="text" id="bc-title" maxlength="64" placeholder="e.g. New product available!" />
+          <label class="field-label">Message Body</label>
+          <textarea id="bc-body" rows="4" maxlength="256" placeholder="Enter your message…"></textarea>
+          <button class="btn-primary btn-wide" onclick="sendBroadcast()">🔔 Send to All Users</button>
+          <p id="bc-result" class="bc-result hidden"></p>
+        </div>
+
+        <div class="card">
+          <div class="card-heading">Broadcast History</div>
+          <table class="data-table" id="bc-history-table">
+            <thead><tr><th>Title</th><th>Body</th><th>Sent</th><th>FCM OK</th></tr></thead>
+            <tbody id="bc-history-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── PRODUCT MODAL ─────────────────────────────────── -->
+  <div id="modal-product" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <span id="modal-product-title">Add Product</span>
+        <button class="modal-close" onclick="closeModal('modal-product')">✕</button>
+      </div>
+      <form id="product-form" onsubmit="saveProduct(event)">
+        <label class="field-label">Title *</label>
+        <input type="text" id="pf-title" required />
+        <label class="field-label">Description (Markdown)</label>
+        <textarea id="pf-desc" rows="5"></textarea>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="field-label">Price (LKR) *</label>
+            <input type="number" id="pf-price" min="0" step="0.01" required />
+          </div>
+          <div class="form-col">
+            <label class="field-label">Category *</label>
+            <select id="pf-category" required>
+              <option value="Local_AI">Local AI</option>
+              <option value="Scripts">Scripts</option>
+              <option value="Linux_ISO">Linux ISO</option>
+              <option value="Tools">Tools</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="field-label">Version</label>
+            <input type="text" id="pf-version" placeholder="1.0.0" />
+          </div>
+          <div class="form-col">
+            <label class="field-label">Size (MB)</label>
+            <input type="number" id="pf-size" min="0" step="0.1" />
+          </div>
+        </div>
+        <label class="field-label">Storage Path</label>
+        <input type="text" id="pf-path" placeholder="folder/filename.zip" />
+        <label class="field-label">Requirements</label>
+        <input type="text" id="pf-requirements" placeholder="e.g. Python 3.10+ | 8GB RAM" />
+        <label class="field-label">Tags (comma separated)</label>
+        <input type="text" id="pf-tags" placeholder="python, ai, llm" />
+        <label class="field-label">Preview Code</label>
+        <textarea id="pf-preview" rows="4" style="font-family:monospace;font-size:12px"></textarea>
+        <label class="toggle-wrap">
+          <input type="checkbox" id="pf-active" checked />
+          Active (visible to buyers)
+        </label>
+        <input type="hidden" id="pf-id" />
+        <div class="modal-actions">
+          <button type="button" class="btn-outline" onclick="closeModal('modal-product')">Cancel</button>
+          <button type="submit" class="btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── MEETUP MODAL ─────────────────────────────────── -->
+  <div id="modal-meetup" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <span id="modal-meetup-title">Add Meetup</span>
+        <button class="modal-close" onclick="closeModal('modal-meetup')">✕</button>
+      </div>
+      <form id="meetup-form" onsubmit="saveMeetup(event)">
+        <label class="field-label">Title *</label>
+        <input type="text" id="mf-title" required />
+        <label class="field-label">Description</label>
+        <textarea id="mf-desc" rows="3"></textarea>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="field-label">Latitude</label>
+            <input type="number" id="mf-lat" step="0.000001" value="6.9271" />
+          </div>
+          <div class="form-col">
+            <label class="field-label">Longitude</label>
+            <input type="number" id="mf-lng" step="0.000001" value="79.8612" />
+          </div>
+        </div>
+        <label class="field-label">Location Name</label>
+        <input type="text" id="mf-location" placeholder="e.g. Colombo Innovation Hub" />
+        <label class="field-label">Starts At</label>
+        <input type="datetime-local" id="mf-starts" />
+        <label class="toggle-wrap">
+          <input type="checkbox" id="mf-active" checked />
+          Active
+        </label>
+        <input type="hidden" id="mf-id" />
+        <div class="modal-actions">
+          <button type="button" class="btn-outline" onclick="closeModal('modal-meetup')">Cancel</button>
+          <button type="submit" class="btn-primary">Save Meetup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

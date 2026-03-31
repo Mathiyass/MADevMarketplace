@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dot_grid"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- HEADER PATH -->
+        <TextView
+            style="@style/TextAppearance.MADev.Terminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="~/USER/DASHBOARD"
+            android:layout_marginBottom="24dp" />
+
+        <!-- USER IDENTITY BLOCK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:background="@color/surface_lowest"
+            android:layout_marginBottom="32dp">
+
+            <FrameLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@color/bg_dark">
+                <TextView
+                    android:id="@+id/tv_avatar_initials"
+                    style="@style/TextAppearance.MADev.H2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/teal_primary"
+                    android:text="ST" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/teal_primary" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp">
+                <TextView
+                    android:id="@+id/tv_full_name"
+                    style="@style/TextAppearance.MADev.H2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">_ ROOT_USER" />
+                <TextView
+                    android:id="@+id/tv_email"
+                    style="@style/TextAppearance.MADev.Terminal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="root@madev.sh"
+                    android:textColor="@color/text_muted" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- STATS GRID -->
+        <TextView
+            style="@style/TextAppearance.MADev.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[ SYSTEM_METRICS ]"
+            android:textColor="@color/teal_primary"
+            android:layout_marginBottom="12dp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:alignmentMode="alignMargins"
+            android:layout_marginBottom="40dp">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.MADev.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        style="@style/TextAppearance.MADev.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TOTAL_EXPENDITURE" />
+                    <TextView
+                        android:id="@+id/tv_total_spent"
+                        style="@style/TextAppearance.MADev.Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$124.00"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.MADev.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        style="@style/TextAppearance.MADev.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UPTIME_SINCE" />
+                    <TextView
+                        android:id="@+id/tv_member_since"
+                        style="@style/TextAppearance.MADev.Terminal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2024-03-12"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+        <!-- ACTION SEQUENCE -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_out"
+            style="@style/Widget.MADev.Button.Outline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TERMINATE_SESSION"
+            app:icon="@drawable/ic_logout" />
+
+    </LinearLayout>
+</ScrollView>
