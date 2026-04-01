@@ -3,8 +3,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  --bg-base:      #0a0a0f;
-  --bg-surface:   #111118;
+  --bg-base:      #000000;
+  --bg-surface:   #000000;
   --bg-raised:    #1a1a24;
   --bg-hover:     #22222f;
   --border:       #2a2a3a;
@@ -54,7 +54,7 @@ body {
 ══════════════════════════════════════════════════════ */
 .overlay {
   position: fixed; inset: 0;
-  background: linear-gradient(135deg, #0a0a0f 0%, #12121e 100%);
+  background: var(--bg-base);
   display: flex; align-items: center; justify-content: center;
   z-index: 9999;
 }
@@ -63,18 +63,12 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 48px 40px;
-  width: 380px;
+  width: 440px;
   text-align: center;
   box-shadow: 0 32px 64px rgba(0,0,0,.7), var(--teal-glow);
+  display: flex; flex-direction: column; align-items: center;
 }
-.login-logo {
-  font-family: var(--font-mono);
-  font-size: 28px; font-weight: 700;
-  color: var(--teal);
-  margin-bottom: 6px;
-  letter-spacing: 2px;
-  text-shadow: var(--teal-glow);
-}
+/* Branding handled by img assets now */
 .login-sub { color: var(--text-muted); font-size: 13px; margin-bottom: 32px; }
 .login-card input[type=password] {
   display: block; width: 100%;
@@ -201,6 +195,19 @@ nav { flex: 1; padding: 16px 0; }
 /* ── TABS ────────────────────────────────────────────── */
 .tab { padding: 28px; animation: fadeIn .2s ease; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+/* ── BRANDING ───────────────────────────────────────── */
+.brand-logo-full {
+  max-width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  margin-bottom: 28px;
+}
+.brand-icon {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
 
 /* ── KPI GRID ────────────────────────────────────────── */
 .kpi-grid {

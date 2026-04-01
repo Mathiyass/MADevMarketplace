@@ -15,6 +15,7 @@
   <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <link rel="icon" type="image/png" href="assets/icon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -22,7 +23,7 @@
   <!-- ─── LOGIN OVERLAY ─────────────────────────────── -->
   <div id="login-overlay" class="overlay">
     <div class="login-card">
-      <div class="login-logo">&gt;_ MA_Dev</div>
+      <img src="assets/logo.png" class="brand-logo-full" style="max-height: 100px; width: auto; mix-blend-mode: screen; filter: brightness(1.1) contrast(1.2);" alt="MA_Dev Logo" />
       <p class="login-sub">Admin Control Panel</p>
       <form id="login-form" onsubmit="handleLogin(event)">
         <label class="field-label">Master Password</label>
@@ -39,8 +40,11 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <span class="brand">&gt;_ MA_Dev</span>
-        <span class="brand-sub">Admin Panel</span>
+        <img src="assets/icon.png" class="brand-icon" style="width: 36px; height: 36px; object-fit: contain;" alt="MA_Dev Icon" />
+        <div class="brand-text">
+          <span class="brand">MA_Dev</span>
+          <span class="brand-sub">Admin Panel</span>
+        </div>
       </div>
       <nav>
         <a href="#" onclick="showTab('dashboard')"  id="nav-dashboard"  class="nav-link active"><span class="nav-icon">◈</span>Dashboard</a>

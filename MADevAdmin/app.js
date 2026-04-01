@@ -227,10 +227,10 @@ function openProductModal(product = null) {
   document.getElementById('pf-id').value           = product?.product_id || '';
   document.getElementById('pf-title').value        = product?.title       || '';
   document.getElementById('pf-desc').value         = product?.description || '';
-  document.getElementById('pf-price').value        = product?.price       || '';
+  document.getElementById('pf-price').value        = product?.price       ?? '';
   document.getElementById('pf-category').value     = product?.category    || 'Tools';
   document.getElementById('pf-version').value      = product?.version     || '1.0.0';
-  document.getElementById('pf-size').value         = product?.size_mb     || '';
+  document.getElementById('pf-size').value         = product?.size_mb     ?? '';
   document.getElementById('pf-path').value         = product?.storage_path|| '';
   document.getElementById('pf-requirements').value = product?.requirements || '';
   document.getElementById('pf-tags').value         = (product?.tags || []).join(', ');
@@ -246,10 +246,10 @@ async function saveProduct(event) {
   const payload = {
     title:        document.getElementById('pf-title').value.trim(),
     description:  document.getElementById('pf-desc').value.trim(),
-    price:        parseFloat(document.getElementById('pf-price').value),
+    price:        parseFloat(document.getElementById('pf-price').value || 0),
     category:     document.getElementById('pf-category').value,
     version:      document.getElementById('pf-version').value.trim() || '1.0.0',
-    size_mb:      parseFloat(document.getElementById('pf-size').value) || null,
+    size_mb:      parseFloat(document.getElementById('pf-size').value) || 0,
     storage_path: document.getElementById('pf-path').value.trim() || null,
     requirements: document.getElementById('pf-requirements').value.trim() || null,
     tags,
@@ -481,22 +481,32 @@ async function loadBroadcastHistory() {
 let searchTimer;
 async function globalSearch(q) {
   clearTimeout(searchTimer);
-  if (!q.trim()) return;
+  if (!q.trim()) return loadProducts();
   searchTimer = setTimeout(async () => {
-    const { data } = await sb.from('products').select('product_id,title,category,price')
-      .ilike('title', `%${q}%`).limit(5);
-    if (!data?.length) return;
-    // swap to products tab with results highlighted
+    const { data } = await sb.from('products').select('*')
+      .ilike('title', `%${q}%`).limit(20);
+    
+    // Always switch to products tab
     showTab('products');
+    
     const tbody = document.getElementById('products-tbody');
+    if (!data?.length) {
+      tbody.innerHTML = '<tr><td colspan="7" class="table-loading">No search results for "'+q+'"</td></tr>';
+      return;
+    }
+    
     tbody.innerHTML = data.map(p => `
       <tr>
-        <td><strong>${p.title}</strong></td>
+        <td title="${p.title}"><strong>${p.title}</strong></td>
         <td>${catPill(p.category)}</td>
         <td>LKR ${parseFloat(p.price).toFixed(2)}</td>
-        <td>—</td><td>—</td>
-        <td><span class="badge badge-active">active</span></td>
-        <td><button class="btn-sm" onclick='loadProducts()'>Back</button></td>
+        <td>${p.size_mb ? p.size_mb + ' MB' : '—'}</td>
+        <td>${p.download_count || 0}</td>
+        <td><span class="badge ${p.is_active ? 'badge-active':'badge-inactive'}">${p.is_active?'active':'inactive'}</span></td>
+        <td>
+          <button class="btn-sm" onclick='openProductModal(${JSON.stringify(p).replace(/'/g,"\\'")})'  style="margin-right:6px">Edit</button>
+          <button class="btn-sm" onclick="loadProducts()">Clear</button>
+        </td>
       </tr>`).join('');
   }, 300);
 }
